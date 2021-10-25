@@ -464,8 +464,10 @@ class DpdParcels extends WC_Shipping_Method {
 			$shipping_country = "WHERE country = '{$country}'";
 		}
 
-		$terminals = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}dpd_terminals {$shipping_country} ORDER BY company" );
-		
+		// $terminals = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}dpd_terminals {$shipping_country} ORDER BY company" );
+		$places = "AND company regexp 'TOP|Top|Rimi|RIMI|Mego|Elvi|Maxima'";
+		$terminals = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}dpd_terminals {$shipping_country} {$places} ORDER BY company" );
+
 		return $terminals;
 	}
 
